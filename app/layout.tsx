@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import ChatWidget from '@/components/ChatWidget';
 
 export const metadata: Metadata = {
   title: 'EzzyGo Removals — Affordable & Reliable Queensland Removalists',
@@ -41,7 +42,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-cream-100 text-ink-900 antialiased">{children}</body>
+      <body className="bg-cream-100 text-ink-900 antialiased">
+        {children}
+        <ChatWidget />
+      </body>
     </html>
   );
 }
