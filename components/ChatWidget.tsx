@@ -26,20 +26,14 @@ const QUICK = ['Get a quote', 'Areas you cover', 'Availability'];
    The UI below never needs to change.
    ──────────────────────────────────────────────────────────── */
 async function getBotReply(history: Msg[]): Promise<string> {
-  await new Promise((r) => setTimeout(r, 900)); // simulate thinking
-  const last = history[history.length - 1]?.content.toLowerCase() ?? '';
-
-  if (/area|suburb|cover|where|brisbane|gold coast|logan|qld|queensland/.test(last))
-    return "We cover all of Queensland — Brisbane, Gold Coast, Logan, the lot. Where are you moving from and to?";
-  if (/avail|when|saturday|sunday|today|tomorrow|date|book/.test(last))
-    return "We run 7 days, 7am–9pm, and often fit same-day jobs. What date were you thinking, and what's your name and best mobile so we can confirm?";
-  if (/price|cost|quote|how much|\$|estimate/.test(last))
-    return "Happy to get you a fixed quote — no hidden fees, GST and insurance included. Quick few things: how many bedrooms (or what items), and roughly how far is the move?";
-  if (/hi|hey|hello|g'?day/.test(last))
-    return "Hey! Whereabouts are you moving from and to, and when?";
-  if (/[0-9]{6,}/.test(last) || /@/.test(last))
-    return "Perfect, got it — I've passed your details to the team and we'll text you a fixed quote shortly. Anything else I can help with in the meantime?";
-  return "Got it. To pull together a fixed quote, can you tell me the rough size of the move (bedrooms or main items) and the two suburbs you're moving between?";
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: history }),
+  });
+  if (!res.ok) throw new Error('chat request failed');
+  const data = await res.json();
+  return (data.reply as string) || "Sorry — give us a call on +61 481 356 811 and we'll sort you out.";
 }
 
 export default function ChatWidget() {
