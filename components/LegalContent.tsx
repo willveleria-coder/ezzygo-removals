@@ -166,7 +166,7 @@ export default function LegalContent({
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="mailto:info@ezzygoremovalist.com.au"
+              href="mailto:way2026@ezzygoremovalist.com.au"
               style={{
                 fontFamily: "'Barlow Condensed', sans-serif",
                 fontSize: 14,
@@ -177,7 +177,7 @@ export default function LegalContent({
                 textDecoration: 'none',
               }}
             >
-              info@ezzygoremovalist.com.au
+              way2026@ezzygoremovalist.com.au
             </a>
             <span style={{ color: '#ccc' }}>·</span>
             <a

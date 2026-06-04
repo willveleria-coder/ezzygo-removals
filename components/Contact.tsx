@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle2, Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 const inputStyle = {
   width: '100%',
@@ -122,7 +123,7 @@ function SelectField({
 // Contact methods: phone stays orange (call = action), email/location are blue (info)
 const contactMethods = [
   { icon: Phone, label: 'Call us', value: '+61 481 356 811', href: 'tel:+61481356811', blue: false },
-  { icon: Mail, label: 'Email', value: 'info@ezzygoremovalist.com.au', href: 'mailto:info@ezzygoremovalist.com.au', blue: true },
+  { icon: Mail, label: 'Email', value: 'way2026@ezzygoremovalist.com.au', href: 'mailto:way2026@ezzygoremovalist.com.au', blue: true },
   { icon: MapPin, label: 'Service area', value: 'All of Queensland', href: undefined, blue: true },
 ];
 
@@ -177,6 +178,49 @@ export default function Contact() {
         }),
       });
     } catch (_) {}
+
+    // ── Save into the CRM (Supabase). If the visitor used the quote
+    //    calculator, attach the estimate and save as a real quote. ──
+    try {
+      let est: any = null;
+      try { est = JSON.parse(sessionStorage.getItem('ezzygo_quote') || 'null'); } catch (_) {}
+
+      const moveLines = [
+        form.service && `Service: ${form.service}`,
+        form.from && `Moving from: ${form.from}`,
+        form.to && `Moving to: ${form.to}`,
+        form.date && `Preferred date: ${form.date}`,
+        est && `Estimated: $${est.total} (${est.size}, ${est.movers} movers, ${est.distance}km${est.addons ? ', ' + est.addons : ''})`,
+        form.message && `\n${form.message}`,
+      ].filter(Boolean).join('\n');
+
+      if (est) {
+        await supabase.from('quotes').insert({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          move_date: form.date || null,
+          pickup_address: form.from || null,
+          dropoff_address: form.to || null,
+          home_size: est.size || null,
+          service_type: form.service || null,
+          rate_tier: est.movers ? `${est.movers}-movers` : null,
+          estimated_hours: est.hours ?? null,
+          estimated_total: est.total ?? null,
+          details: moveLines,
+        });
+        sessionStorage.removeItem('ezzygo_quote');
+      } else {
+        await supabase.from('form_submissions').insert({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: `Quote request${form.service ? ' — ' + form.service : ''}`,
+          message: moveLines,
+        });
+      }
+    } catch (_) {}
+
     setTimeout(() => setStatus('sent'), 1000);
   };
 

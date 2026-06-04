@@ -468,6 +468,13 @@ export default function QuoteCalculator() {
 
                 <a
                   href="#contact"
+                  onClick={() => {
+                    try {
+                      const sizeLabel = moveTypes.find((m) => m.id === moveType)?.label || moveType;
+                      const addons = [stairs && 'Stairs', packing && 'Packing', urgent && 'Same-day'].filter(Boolean).join(', ');
+                      sessionStorage.setItem('ezzygo_quote', JSON.stringify({ total, hours, size: sizeLabel, movers, distance, addons }));
+                    } catch (_) {}
+                  }}
                   className="mt-7 flex w-full items-center justify-center gap-2 rounded-[14px] py-4 transition-all duration-200"
                   style={{
                     background: '#FF6B00',

@@ -1,5 +1,6 @@
 'use client';
 
+import { supabase } from '@/lib/supabase';
 import { motion } from 'framer-motion';
 import { ArrowRight, Phone, Star, Shield, Zap, MapPin, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
@@ -54,6 +55,18 @@ export default function Hero() {
         }),
       });
     } catch (_) {}
+
+    try {
+      await supabase.from('quotes').insert({
+        name: form.name,
+        phone: form.phone,
+        pickup_address: form.from,
+        dropoff_address: form.to,
+        move_date: form.date || null,
+        details: 'Homepage hero — quick quote request',
+      });
+    } catch (_) {}
+
     setSubmitted(true);
   };
 

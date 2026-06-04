@@ -11,7 +11,7 @@ import {
   Truck,
 } from 'lucide-react';
 
-const ADDRESS = '34 Maller Cres, Redbank Plains QLD 4301, Australia';
+const ADDRESS = 'Redbank Plains QLD 4301, Australia';
 const ENCODED_ADDRESS = encodeURIComponent(ADDRESS);
 
 // Google Maps free embed — no API key required

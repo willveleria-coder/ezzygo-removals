@@ -249,7 +249,7 @@ export default function Footer() {
                 { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/ezzygoremovalist' },
                 { icon: Facebook,  label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61588721048244' },
                 { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/61481356811' },
-                { icon: Mail, label: 'Email', href: 'mailto:info@ezzygoremovalist.com.au' },
+                { icon: Mail, label: 'Email', href: 'mailto:way2026@ezzygoremovalist.com.au' },
               ].map((s) => (
                 <a
                   key={s.label}

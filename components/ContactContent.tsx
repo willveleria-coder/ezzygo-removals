@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Phone,
@@ -47,9 +48,9 @@ const contactMethods = [
   {
     icon: Mail,
     label: 'Email',
-    primary: 'info@ezzygoremovalist.com.au',
+    primary: 'way2026@ezzygoremovalist.com.au',
     sub: 'Reply within the hour',
-    href: 'mailto:info@ezzygoremovalist.com.au',
+    href: 'mailto:way2026@ezzygoremovalist.com.au',
     external: false,
     blue: true,
   },
@@ -138,6 +139,23 @@ export default function ContactContent() {
         }),
       });
     } catch (_) {}
+
+    try {
+      await supabase.from('form_submissions').insert({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        subject: `Contact form${form.service ? ' — ' + form.service : ''}`,
+        message: [
+          form.service && `Service: ${form.service}`,
+          form.from && `Moving from: ${form.from}`,
+          form.to && `Moving to: ${form.to}`,
+          form.date && `Preferred date: ${form.date}`,
+          form.message && `\n${form.message}`,
+        ].filter(Boolean).join('\n'),
+      });
+    } catch (_) {}
+
     setTimeout(() => setStatus('sent'), 900);
   };
 

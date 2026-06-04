@@ -85,7 +85,7 @@ export default function PrivacyPage() {
           {
             heading: '6. Accessing or correcting your information',
             paragraphs: [
-              'You have the right to access the personal information we hold about you, and to request corrections if it is inaccurate. Contact us at info@ezzygoremovalist.com.au and we will respond within a reasonable timeframe.',
+              'You have the right to access the personal information we hold about you, and to request corrections if it is inaccurate. Contact us at way2026@ezzygoremovalist.com.au and we will respond within a reasonable timeframe.',
             ],
           },
           {
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           {
             heading: '9. Complaints',
             paragraphs: [
-              'If you believe we have breached your privacy, please contact us first at info@ezzygoremovalist.com.au. If you are not satisfied with our response, you can lodge a complaint with the Office of the Australian Information Commissioner at oaic.gov.au.',
+              'If you believe we have breached your privacy, please contact us first at way2026@ezzygoremovalist.com.au. If you are not satisfied with our response, you can lodge a complaint with the Office of the Australian Information Commissioner at oaic.gov.au.',
             ],
           },
         ]}

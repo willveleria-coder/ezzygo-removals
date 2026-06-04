@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Package,
@@ -234,6 +235,22 @@ export default function BookingFlow() {
           message,
           botcheck: '',
         }),
+      });
+
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const startISO = date
+        ? new Date(`${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${time || '09:00'}:00`).toISOString()
+        : null;
+      await supabase.from('bookings').insert({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service_type: selectedService?.label || null,
+        start_time: startISO,
+        pickup_address: form.from,
+        dropoff_address: form.to,
+        notes: message,
+        source: 'form',
       });
     } catch (_) {}
     setTimeout(() => {
