@@ -112,24 +112,35 @@ export async function POST(req: Request) {
     const body = await req.json();
     const incoming: { role: 'user' | 'assistant'; content: string }[] = body?.messages ?? [];
 
+
+    // Guard: cap each message length so nobody can paste a huge injection wall
+    for (const m of incoming) {
+      if (typeof m.content === 'string' && m.content.length > 2000) {
+        m.content = m.content.slice(0, 2000);
+      }
+    }
+
     // Build Anthropic-format history
     const messages: any[] = incoming
       .filter((m) => m && m.content)
       .map((m) => ({ role: m.role, content: m.content }));
 
+    // keep only the last 12 turns
+    const trimmed = messages.slice(-12);
+
     // Tool loop (max 4 rounds)
     for (let i = 0; i < 4; i++) {
-      const data = await callClaude(messages);
+      const data = await callClaude(trimmed);
 
       if (data.stop_reason === 'tool_use') {
         const toolUses = (data.content ?? []).filter((b: any) => b.type === 'tool_use');
-        messages.push({ role: 'assistant', content: data.content });
+        trimmed.push({ role: 'assistant', content: data.content });
         const results = [];
         for (const t of toolUses) {
           const out = t.name === 'save_lead' ? await saveLead(t.input) : 'Unknown tool.';
           results.push({ type: 'tool_result', tool_use_id: t.id, content: out });
         }
-        messages.push({ role: 'user', content: results });
+        trimmed.push({ role: 'user', content: results });
         continue; // ask Claude again so it produces a text reply
       }
 
