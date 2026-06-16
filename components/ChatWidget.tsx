@@ -1,8 +1,9 @@
-'use client';
-
+"use client";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, ArrowRight } from 'lucide-react';
+
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -71,6 +72,9 @@ export default function ChatWidget() {
     </svg>
   );
 
+  const pathname = usePathname();
+  if (pathname === "/card") return null;
+  
   return (
     <>
       <style>{`
