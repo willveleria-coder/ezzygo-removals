@@ -18,6 +18,7 @@ const INFO = {
   email: "info@ezzygoremovalist.com.au",
   website: "https://ezzygoremovalist.com.au",
   book: "https://ezzygoremovalist.com.au/book",
+  review: "https://g.page/r/CUkmB3ccw8MWEAE/review", // Google review link
   facebook: "https://www.facebook.com/profile.php?id=61588721048244",
   instagram: "https://www.instagram.com/ezzygoremovalist",
   tiktok: "",
@@ -72,6 +73,25 @@ export default function CardLandingPage() {
 
         {/* primary actions */}
         <div className="mt-7 w-full flex flex-col gap-3">
+
+          {/* ⭐ Leave Us a Review — glowing gold button */}
+          <a
+            href={INFO.review}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full rounded-xl py-4 font-bold text-[#1a1200] text-base transition active:scale-[0.99] flex items-center justify-center gap-2"
+            style={{
+              background: "linear-gradient(135deg, #FFD700 0%, #FFA500 100%)",
+              boxShadow:
+                "0 0 16px 3px rgba(255, 200, 0, 0.55), 0 0 40px 6px rgba(255, 160, 0, 0.25)",
+              animation: "reviewPulse 2.8s ease-in-out infinite",
+            }}
+          >
+            <StarIcon />
+            Leave Us a Review
+            <StarIcon />
+          </a>
+
           <a
             href={INFO.book}
             className="w-full rounded-xl py-4 font-bold text-white text-base shadow-lg transition active:scale-[0.99]"
@@ -128,7 +148,28 @@ export default function CardLandingPage() {
           © {new Date().getFullYear()} EzzyGo Removals
         </p>
       </div>
+
+      {/* Glow pulse keyframe */}
+      <style>{`
+        @keyframes reviewPulse {
+          0%, 100% {
+            box-shadow: 0 0 16px 3px rgba(255, 200, 0, 0.55), 0 0 40px 6px rgba(255, 160, 0, 0.25);
+          }
+          50% {
+            box-shadow: 0 0 26px 8px rgba(255, 210, 0, 0.80), 0 0 60px 16px rgba(255, 160, 0, 0.40);
+          }
+        }
+      `}</style>
     </main>
+  );
+}
+
+/* ─── Star icon for review button ───────────────────────────────── */
+function StarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z" />
+    </svg>
   );
 }
 
