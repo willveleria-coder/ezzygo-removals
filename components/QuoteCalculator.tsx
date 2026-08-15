@@ -11,18 +11,19 @@ import {
   Plus,
   Sparkles,
   Check,
+  Shield,
 } from 'lucide-react';
 
 type MoveType = 'studio' | '1br' | '2br' | '3br' | '4br' | 'office' | 'single';
 
-const moveTypes: { id: MoveType; label: string; icon: any; baseHours: number }[] = [
-  { id: 'studio', label: 'Studio',      icon: Home,      baseHours: 2 },
-  { id: '1br',    label: '1 Bedroom',   icon: Home,      baseHours: 3 },
-  { id: '2br',    label: '2 Bedroom',   icon: Home,      baseHours: 4 },
-  { id: '3br',    label: '3 Bedroom',   icon: Home,      baseHours: 6 },
-  { id: '4br',    label: '4+ Bedroom',  icon: Home,      baseHours: 8 },
-  { id: 'office', label: 'Office',      icon: Building2, baseHours: 4 },
-  { id: 'single', label: 'Single Item', icon: Sofa,      baseHours: 1 },
+const moveTypes: { id: MoveType; label: string; icon: any; suggestedMovers: number }[] = [
+  { id: 'studio', label: 'Studio',      icon: Home,      suggestedMovers: 2 },
+  { id: '1br',    label: '1 Bedroom',   icon: Home,      suggestedMovers: 2 },
+  { id: '2br',    label: '2 Bedroom',   icon: Home,      suggestedMovers: 2 },
+  { id: '3br',    label: '3 Bedroom',   icon: Home,      suggestedMovers: 3 },
+  { id: '4br',    label: '4+ Bedroom',  icon: Home,      suggestedMovers: 4 },
+  { id: 'office', label: 'Office',      icon: Building2, suggestedMovers: 4 },
+  { id: 'single', label: 'Single Item', icon: Sofa,      suggestedMovers: 2 },
 ];
 
 export default function QuoteCalculator() {
@@ -34,24 +35,18 @@ export default function QuoteCalculator() {
   const [urgent,   setUrgent]   = useState(false);
   const [saved,    setSaved]    = useState(false);
 
-  const { hours, total, breakdown } = useMemo(() => {
-    const base       = moveTypes.find((m) => m.id === moveType)!;
-    const stairsHrs  = stairs  ? 0.5                    : 0;
-    const packingHrs = packing ? base.baseHours * 0.5   : 0;
-    const totalHrs   = base.baseHours + stairsHrs + packingHrs;
-    // Enforce 2-hour minimum
-    const billableHrs = Math.max(2, totalHrs);
-    const hourlyRate = movers === 2 ? 169 : movers === 3 ? 219 : 279;
-    const labour     = billableHrs * hourlyRate;
-    const travel     = Math.max(0, distance - 10) * 2.5;
-    const fuelLevy   = 14;
-    const surcharge  = urgent ? labour * 0.15 : 0;
+  const { sizeLabel, suggestedMovers, addons } = useMemo(() => {
+    const base = moveTypes.find((m) => m.id === moveType)!;
     return {
-      hours: billableHrs,
-      total: Math.round(labour + travel + fuelLevy + surcharge),
-      breakdown: { labour: Math.round(labour), travel: Math.round(travel), fuelLevy, surcharge: Math.round(surcharge), hourlyRate },
+      sizeLabel: base.label,
+      suggestedMovers: base.suggestedMovers,
+      addons: [
+        stairs && 'Stairs / walk-up',
+        packing && 'Packing service',
+        urgent && 'Same-day',
+      ].filter(Boolean) as string[],
     };
-  }, [moveType, movers, distance, stairs, packing, urgent]);
+  }, [moveType, stairs, packing, urgent]);
 
   useEffect(() => {
     setSaved(true);
@@ -92,7 +87,7 @@ export default function QuoteCalculator() {
               }}
             >
               <span style={{ display: 'inline-block', width: 28, height: 1, background: '#FF6B00' }} />
-              03 / Instant Quote
+              03 / Free quote
             </motion.div>
 
             <motion.h2
@@ -110,7 +105,7 @@ export default function QuoteCalculator() {
                 color: '#111',
               }}
             >
-              Build your quote
+              Tell us the job
               <br />
               in <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>60 seconds.</em>
             </motion.h2>
@@ -123,8 +118,8 @@ export default function QuoteCalculator() {
             transition={{ delay: 0.18 }}
             style={{ fontSize: 16, color: '#666', lineHeight: 1.7, maxWidth: 380 }}
           >
-            Adjust the options below for a live estimate. Lock it in any time
-            and we&apos;ll confirm by text.
+            Fill in the details below and we&apos;ll come back with a fixed
+            price for your move — usually within the hour, no obligation.
           </motion.p>
         </div>
 
@@ -200,7 +195,10 @@ export default function QuoteCalculator() {
                     return (
                       <button
                         key={m.id}
-                        onClick={() => setMoveType(m.id)}
+                        onClick={() => {
+                          setMoveType(m.id);
+                          setMovers(m.suggestedMovers);
+                        }}
                         className="flex flex-col items-center gap-2 rounded-[16px] p-4 transition-all duration-200"
                         style={{
                           background: active ? 'rgba(255,107,0,0.07)' : 'rgba(0,0,0,0.02)',
@@ -281,8 +279,13 @@ export default function QuoteCalculator() {
                         marginTop: 4,
                       }}
                     >
-                      Movers + Truck —{' '}
-                      <span style={{ color: '#FF6B00' }}>${breakdown.hourlyRate}/hr</span>
+                      Movers + Truck
+                      {movers === suggestedMovers && (
+                        <>
+                          {' — '}
+                          <span style={{ color: '#0EA5E9' }}>we&apos;d suggest this</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -416,24 +419,27 @@ export default function QuoteCalculator() {
                   }}
                 >
                   <Sparkles size={12} />
-                  Estimated quote
+                  Your move
                 </div>
 
                 <motion.div
-                  key={total}
-                  initial={{ scale: 0.9, opacity: 0 }}
+                  key={sizeLabel}
+                  initial={{ scale: 0.94, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: 'spring', duration: 0.4 }}
                   style={{
                     fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 'clamp(64px, 7vw, 84px)',
+                    fontSize: 'clamp(40px, 4.4vw, 54px)',
                     fontWeight: 900,
-                    color: '#FF6B00',
-                    lineHeight: 1,
-                    letterSpacing: '-0.03em',
+                    color: '#fff',
+                    lineHeight: 1.02,
+                    letterSpacing: '-0.02em',
+                    textTransform: 'uppercase',
                   }}
                 >
-                  ${total.toLocaleString()}
+                  {sizeLabel}
+                  <br />
+                  <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>move.</em>
                 </motion.div>
 
                 <div
@@ -442,37 +448,41 @@ export default function QuoteCalculator() {
                     fontSize: 10,
                     color: 'rgba(255,255,255,0.4)',
                     letterSpacing: '0.12em',
-                    marginTop: 8,
+                    marginTop: 10,
                     textTransform: 'uppercase',
                   }}
                 >
-                  Approx. {hours} hours total
+                  {movers} movers · {distance} km
                 </div>
 
                 <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', margin: '24px 0' }} />
 
                 <div className="space-y-3">
-                  <SummaryRow label={`Labour (${hours}h × $${breakdown.hourlyRate})`} value={`$${breakdown.labour}`} />
-                  {breakdown.travel > 0 && (
-                    <SummaryRow label="Travel surcharge" value={`$${breakdown.travel}`} />
-                  )}
-                  <SummaryRow label="Fuel levy" value={`$${breakdown.fuelLevy}`} />
-                  {breakdown.surcharge > 0 && (
-                    <SummaryRow label="Same-day urgency (15%)" value={`$${breakdown.surcharge}`} />
+                  <SummaryRow label="Move size" value={sizeLabel} />
+                  <SummaryRow label="Crew" value={`${movers} movers + truck`} />
+                  <SummaryRow label="Distance" value={`${distance} km`} />
+                  {addons.length > 0 && (
+                    <SummaryRow label="Add-ons" value={addons.join(', ')} />
                   )}
                   <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', margin: '12px 0' }} />
-                  <SummaryRow label="GST included"    value="✓" muted />
+                  <SummaryRow label="GST included"       value="✓" muted />
                   <SummaryRow label="Insurance included" value="✓" muted />
-                  <SummaryRow label="2hr minimum"  value="✓" muted />
+                  <SummaryRow label="Fixed price quote"  value="✓" muted />
                 </div>
 
                 <a
                   href="#contact"
                   onClick={() => {
                     try {
-                      const sizeLabel = moveTypes.find((m) => m.id === moveType)?.label || moveType;
-                      const addons = [stairs && 'Stairs', packing && 'Packing', urgent && 'Same-day'].filter(Boolean).join(', ');
-                      sessionStorage.setItem('ezzygo_quote', JSON.stringify({ total, hours, size: sizeLabel, movers, distance, addons }));
+                      sessionStorage.setItem(
+                        'ezzygo_quote',
+                        JSON.stringify({
+                          size: sizeLabel,
+                          movers,
+                          distance,
+                          addons: addons.join(', '),
+                        })
+                      );
                     } catch (_) {}
                   }}
                   className="mt-7 flex w-full items-center justify-center gap-2 rounded-[14px] py-4 transition-all duration-200"
@@ -498,12 +508,12 @@ export default function QuoteCalculator() {
                     (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                   }}
                 >
-                  GET MY QUOTE
+                  GET MY FREE QUOTE
                   <Truck size={16} />
                 </a>
 
                 <p
-                  className="mt-3 text-center leading-relaxed"
+                  className="mt-3 flex items-center justify-center gap-1.5 text-center leading-relaxed"
                   style={{
                     fontFamily: "'Space Mono', monospace",
                     fontSize: 9,
@@ -511,7 +521,8 @@ export default function QuoteCalculator() {
                     letterSpacing: '0.08em',
                   }}
                 >
-                  Final pricing may vary by access, item volume and date.
+                  <Shield size={10} />
+                  No obligation · Usually back within the hour
                 </p>
               </div>
             </div>
@@ -569,8 +580,8 @@ function SummaryRow({
   muted?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between">
-      <span style={{ fontSize: 13, color: muted ? 'rgba(125,211,252,0.7)' : 'rgba(255,255,255,0.6)' }}>
+    <div className="flex items-start justify-between gap-4">
+      <span style={{ fontSize: 13, color: muted ? 'rgba(125,211,252,0.7)' : 'rgba(255,255,255,0.6)', whiteSpace: 'nowrap' }}>
         {label}
       </span>
       <span
@@ -578,6 +589,7 @@ function SummaryRow({
           fontSize: 13,
           fontWeight: muted ? 400 : 600,
           color: muted ? '#7DD3FC' : '#fff',
+          textAlign: 'right',
         }}
       >
         {value}

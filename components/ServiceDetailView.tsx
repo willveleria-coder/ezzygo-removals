@@ -115,7 +115,7 @@ export default function ServiceDetailView({ slug }: { slug: string }) {
               <div className="grid grid-cols-3 gap-2">
                 {[
                   { icon: Clock, label: 'Duration', value: service.duration },
-                  { icon: DollarSign, label: 'From', value: service.from },
+                  { icon: DollarSign, label: 'From', value: 'Quote' },
                   { icon: Users, label: 'Crew', value: '2–4 movers' },
                 ].map((s) => (
                   <motion.div
@@ -651,7 +651,7 @@ export default function ServiceDetailView({ slug }: { slug: string }) {
                           lineHeight: 1,
                         }}
                       >
-                        {s.from}
+                        {s.tagline}
                       </div>
                     </div>
                     <div

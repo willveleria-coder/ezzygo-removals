@@ -1,0 +1,5 @@
+components/BookingFlow.tsx:244:      await supabase.from('bookings').insert({
+components/Contact.tsx:198:        await supabase.from('quotes').insert({
+components/Contact.tsx:214:        await supabase.from('form_submissions').insert({
+components/ContactContent.tsx:144:      await supabase.from('form_submissions').insert({
+components/Hero.tsx:60:      await supabase.from('quotes').insert({

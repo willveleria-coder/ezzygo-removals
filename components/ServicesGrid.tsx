@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Shield } from 'lucide-react';
 import { services } from '@/lib/services';
 
 export default function ServicesGrid() {
@@ -191,33 +191,22 @@ export default function ServicesGrid() {
 
                   {/* Footer row */}
                   <div
-                    className="flex items-end justify-between pt-3"
+                    className="flex items-center justify-between pt-3"
                     style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}
                   >
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: "'Space Mono', monospace",
-                          fontSize: 9,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.2em',
-                          color: '#aaa',
-                          marginBottom: 3,
-                        }}
-                      >
-                        From
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "'Barlow Condensed', sans-serif",
-                          fontSize: 28,
-                          fontWeight: 800,
-                          color: '#FF6B00',
-                          lineHeight: 1,
-                        }}
-                      >
-                        {s.from}
-                      </div>
+                    <div
+                      className="flex items-center gap-1.5"
+                      style={{
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: 9,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.18em',
+                        color: '#0EA5E9',
+                        fontWeight: 700,
+                      }}
+                    >
+                      <Shield size={11} />
+                      Free fixed quote
                     </div>
                     <div
                       className="flex items-center gap-1.5"

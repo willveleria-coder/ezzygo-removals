@@ -61,7 +61,7 @@ export const locations: Location[] = [
     faqs: [
       {
         q: 'How much does a 2-bedroom move cost in Brisbane?',
-        a: 'Most 2-bedroom moves within Brisbane cost $600–$900 — typically 3-4 hours of two movers at $149/hr plus a small travel charge if you\'re going across town.',
+        a: 'Most 2-bedroom moves within Brisbane take 3-4 hours with two movers. We quote each job as one fixed price based on size, access and distance — send us the two addresses and we\'ll come back within the hour.',
       },
       {
         q: 'Do you cover greater Brisbane and the bayside?',
@@ -119,7 +119,7 @@ export const locations: Location[] = [
     faqs: [
       {
         q: 'Do you charge extra for Gold Coast moves from Brisbane?',
-        a: 'Just a small travel surcharge to cover the run down the M1 — usually $50-100 depending on origin. The hourly rate is the same as a local move.',
+        a: 'The M1 run is factored into your quote up front — no separate surcharge added on the day. Tell us where you\'re starting from and we\'ll price it in.',
       },
       {
         q: 'Can you move me into a highrise apartment?',
@@ -175,7 +175,7 @@ export const locations: Location[] = [
     faqs: [
       {
         q: 'How long does a Brisbane to Sunshine Coast move take?',
-        a: 'Door-to-door usually 5-7 hours including drive time. A 2-bedroom typically costs $1,000-$1,400 all in.',
+        a: 'The M1 run is factored into your quote up front — no separate surcharge added on the day. Tell us where you\'re starting from and we\'ll price it in.',
       },
       {
         q: 'Do you cover all the way to Noosa?',
@@ -231,7 +231,7 @@ export const locations: Location[] = [
     faqs: [
       {
         q: 'Is there a surcharge to move to Ipswich from Brisbane?',
-        a: 'Minimal — just a small travel charge to cover the drive. Most Brisbane-to-Ipswich moves are still well under $1,000 for a 2-bedroom.',
+        a: 'It\'s a short run, so the drive doesn\'t add much. Whatever it comes to is built into your fixed quote before we start.',
       },
       {
         q: 'Do you cover Springfield and the new estates?',
@@ -288,7 +288,7 @@ export const locations: Location[] = [
     faqs: [
       {
         q: 'How much for a Logan to Gold Coast move?',
-        a: 'Usually $600-$900 for a 2-bedroom — most of these are under 4 hours door-to-door.',
+        a: 'Most of these are under 4 hours door-to-door for a 2-bedroom. Send us the addresses and we\'ll quote it properly.',
       },
       {
         q: 'Do you cover all of Logan?',

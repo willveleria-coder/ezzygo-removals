@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   Users,
   Truck,
-  Clock,
   Shield,
   Check,
   ArrowRight,
@@ -18,23 +17,25 @@ import {
   Warehouse,
   MapPinned,
   Zap,
-  HeartHandshake,
   Piano,
   Cat,
+  Ruler,
+  Route,
+  DoorOpen,
+  CalendarDays,
+  Boxes,
 } from 'lucide-react';
 
-const hourlyRates = [
+const crewTiers = [
   {
     movers: 2,
-    rate: 169,
     label: '2 movers + truck',
     desc: 'Ideal for studio, 1BR & 2BR moves',
-    feature: 'Most popular',
+    feature: 'Most common',
     blue: false,
   },
   {
     movers: 3,
-    rate: 219,
     label: '3 movers + truck',
     desc: 'Best for 3BR homes & small offices',
     feature: 'Recommended for 3BR',
@@ -42,7 +43,6 @@ const hourlyRates = [
   },
   {
     movers: 4,
-    rate: 279,
     label: '4 movers + large truck',
     desc: '4+ BR, large offices, time-critical jobs',
     feature: 'Fastest option',
@@ -50,39 +50,64 @@ const hourlyRates = [
   },
 ];
 
-const serviceRates = [
-  { icon: Sofa,      title: 'Furniture transport',     from: 169, unit: '' },
-  { icon: Truck,     title: 'Loading & unloading',     from: 199, unit: '' },
-  { icon: Home,      title: 'Local Brisbane moves',    from: 199, unit: '' },
-  { icon: Package,   title: 'Packing service',         from: 249, unit: '' },
-  { icon: Zap,       title: 'Same-day moves',          from: 249, unit: '' },
-  { icon: Briefcase, title: 'Office relocations',      from: 499, unit: '' },
-  { icon: Home,      title: 'Home removals',           from: 679, unit: '' },
-  { icon: Sparkles,  title: 'Full service move',       from: 899, unit: '' },
-  { icon: Warehouse, title: 'Storage solutions',       from: 45,  unit: '/week per m³' },
-  { icon: MapPinned, title: 'Interstate moves',        from: 2499,unit: '' },
+const services = [
+  { icon: Sofa,      title: 'Furniture transport', sub: 'Single items or a full load' },
+  { icon: Truck,     title: 'Loading & unloading', sub: 'You supply the truck' },
+  { icon: Home,      title: 'Local Brisbane moves', sub: 'Suburb to suburb' },
+  { icon: Package,   title: 'Packing service',      sub: 'We pack, you relax' },
+  { icon: Zap,       title: 'Same-day moves',       sub: 'Subject to availability' },
+  { icon: Briefcase, title: 'Office relocations',   sub: 'After-hours available' },
+  { icon: Home,      title: 'Home removals',        sub: 'Studio through to 5BR' },
+  { icon: Sparkles,  title: 'Full service move',    sub: 'Pack, move, unpack' },
+  { icon: Warehouse, title: 'Storage solutions',    sub: 'Short or long term' },
+  { icon: MapPinned, title: 'Interstate moves',     sub: 'QLD to anywhere' },
 ];
 
-const homeSizeEstimates = [
-  { size: 'Studio',     low:  400, high: 600 },
-  { size: '1 Bedroom',  low:  550, high: 780 },
-  { size: '2 Bedroom',  low:  720, high: 1090 },
-  { size: '3 Bedroom',  low: 1090, high: 1520 },
-  { size: '4+ Bedroom', low: 1520, high: 2200 },
+const quoteFactors = [
+  {
+    icon: Ruler,
+    title: 'Size of the move',
+    desc: 'How many bedrooms, and how full they are. A packed 2BR can be bigger than a sparse 3BR.',
+  },
+  {
+    icon: Route,
+    title: 'Distance',
+    desc: 'Pickup to drop-off, plus how far our crew travels to reach you.',
+  },
+  {
+    icon: DoorOpen,
+    title: 'Access at both ends',
+    desc: 'Stairs, lifts, narrow driveways, long carries and parking all change how long a job takes.',
+  },
+  {
+    icon: CalendarDays,
+    title: 'Date & timing',
+    desc: 'Weekends, end of month and same-day jobs are in higher demand than a mid-week morning.',
+  },
+  {
+    icon: Boxes,
+    title: 'Packing & materials',
+    desc: 'Whether you pack yourself or we handle it, and how many boxes you need from us.',
+  },
+  {
+    icon: Piano,
+    title: 'Specialty items',
+    desc: 'Pianos, pool tables, safes and anything needing extra crew or gear.',
+  },
 ];
 
 const packingBundles = [
-  { name: 'Small', subtitle: 'Studio / 1BR',  price: 189 },
-  { name: 'Medium',subtitle: '2 Bedroom',     price: 289 },
-  { name: 'Large', subtitle: '3 Bedroom',     price: 449 },
-  { name: 'XL',    subtitle: '4+ Bedroom',    price: 649 },
+  { name: 'Small',  subtitle: 'Studio / 1BR' },
+  { name: 'Medium', subtitle: '2 Bedroom' },
+  { name: 'Large',  subtitle: '3 Bedroom' },
+  { name: 'XL',     subtitle: '4+ Bedroom' },
 ];
 
 const specialtyItems = [
-  { icon: Piano, title: 'Piano (ground floor)',     price: 249 },
-  { icon: Piano, title: 'Piano (stairs)',           price: 399 },
-  { icon: Package, title: 'Pool table',             price: 349, sub: 'Disassembly included' },
-  { icon: Cat, title: 'Pet transport',              price: 149, sub: 'Within QLD only' },
+  { icon: Piano,   title: 'Piano',       sub: 'Upright & grand' },
+  { icon: Package, title: 'Pool table',  sub: 'Disassembly included' },
+  { icon: Shield,  title: 'Safes & gym gear', sub: 'Extra crew as needed' },
+  { icon: Cat,     title: 'Pet transport', sub: 'Within QLD only' },
 ];
 
 const alwaysIncluded = [
@@ -98,7 +123,7 @@ const alwaysIncluded = [
 export default function PricingContent() {
   return (
     <>
-      {/* ────────── HOURLY RATES SECTION ────────── */}
+      {/* ────────── HOW IT WORKS / CREW SIZES ────────── */}
       <section
         className="relative overflow-hidden"
         style={{ background: '#F5F4F1' }}
@@ -129,7 +154,7 @@ export default function PricingContent() {
                 }}
               >
                 <span style={{ display: 'inline-block', width: 28, height: 1, background: '#FF6B00' }} />
-                ─── 01 / Hourly rates
+                ─── 01 / How it works
               </motion.div>
 
               <motion.h2
@@ -147,7 +172,7 @@ export default function PricingContent() {
                   color: '#111',
                 }}
               >
-                Honest prices.
+                One quote.
                 <br />
                 <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
                   Nothing hidden.
@@ -171,9 +196,9 @@ export default function PricingContent() {
                   maxWidth: 460,
                 }}
               >
-                These are our standard Monday–Friday hourly rates. The price you see
-                is the price you pay — GST, insurance, fuel, blankets and equipment
-                are all included.
+                Tell us what you&apos;re moving and we&apos;ll come back with a fixed
+                price for the job — GST, insurance, fuel, blankets and equipment all
+                included. The number we give you is the number you pay.
               </p>
 
               <div
@@ -190,14 +215,14 @@ export default function PricingContent() {
                 }}
               >
                 <Shield size={11} />
-                2-hour minimum · Billed in 15-min increments
+                Free quote · No obligation · Usually within the hour
               </div>
             </motion.div>
           </div>
 
-          {/* Hourly rate cards */}
+          {/* Crew size cards */}
           <div className="grid gap-4 md:grid-cols-3">
-            {hourlyRates.map((tier, i) => {
+            {crewTiers.map((tier, i) => {
               const isBlue = tier.blue;
               return (
                 <motion.div
@@ -247,7 +272,7 @@ export default function PricingContent() {
                       {tier.feature}
                     </div>
 
-                    {/* Movers count */}
+                    {/* Crew label */}
                     <div className="mb-3 flex items-center gap-3">
                       <Users
                         size={22}
@@ -268,7 +293,7 @@ export default function PricingContent() {
                       </div>
                     </div>
 
-                    {/* Big price */}
+                    {/* Big crew number */}
                     <div className="mb-2 flex items-baseline gap-2">
                       <span
                         style={{
@@ -280,7 +305,7 @@ export default function PricingContent() {
                           letterSpacing: '-0.03em',
                         }}
                       >
-                        ${tier.rate}
+                        {tier.movers}
                       </span>
                       <span
                         style={{
@@ -290,7 +315,7 @@ export default function PricingContent() {
                           letterSpacing: '0.1em',
                         }}
                       >
-                        /hr
+                        movers
                       </span>
                     </div>
 
@@ -328,7 +353,7 @@ export default function PricingContent() {
                         (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 22px rgba(255,107,0,0.32)';
                       }}
                     >
-                      Book now
+                      Get a quote
                       <ArrowRight size={14} />
                     </Link>
                   </div>
@@ -339,7 +364,7 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* ────────── "FROM" PRICES SECTION ────────── */}
+      {/* ────────── SERVICES WE QUOTE ON ────────── */}
       <section
         className="relative overflow-hidden"
         style={{ background: '#fff' }}
@@ -363,7 +388,7 @@ export default function PricingContent() {
                 }}
               >
                 <span style={{ display: 'inline-block', width: 28, height: 1, background: '#FF6B00' }} />
-                ─── 02 / Service starting prices
+                ─── 02 / What we quote on
               </motion.div>
 
               <motion.h2
@@ -381,10 +406,10 @@ export default function PricingContent() {
                   color: '#111',
                 }}
               >
-                Starting from,
+                Every job,
                 <br />
                 <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
-                  by service.
+                  priced properly.
                 </em>
               </motion.h2>
             </div>
@@ -403,15 +428,15 @@ export default function PricingContent() {
                 maxWidth: 460,
               }}
             >
-              Most customers pay more than the starting price — these are entry-level
-              minimums. Your final quote is based on home size, distance, access and
-              the items you&apos;re moving.
+              Whatever you need shifted, we&apos;ll quote it. One phone call or a
+              two-minute form is all it takes — and there&apos;s no obligation to
+              book once you&apos;ve got the number.
             </motion.p>
           </div>
 
-          {/* Service rate cards */}
+          {/* Service cards */}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {serviceRates.map((s, i) => (
+            {services.map((s, i) => (
               <motion.div
                 key={s.title}
                 initial={{ opacity: 0, y: 16 }}
@@ -452,7 +477,7 @@ export default function PricingContent() {
                     color: '#111',
                     letterSpacing: '0.02em',
                     lineHeight: 1.2,
-                    marginBottom: 10,
+                    marginBottom: 8,
                     minHeight: 36,
                   }}
                 >
@@ -460,39 +485,13 @@ export default function PricingContent() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: 8.5,
-                    color: '#aaa',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    marginBottom: 2,
+                    fontFamily: "'Barlow', sans-serif",
+                    fontSize: 13,
+                    color: '#777',
+                    lineHeight: 1.5,
                   }}
                 >
-                  From
-                </div>
-                <div className="flex items-baseline gap-1.5">
-                  <span
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: 30,
-                      fontWeight: 800,
-                      color: '#FF6B00',
-                      lineHeight: 1,
-                    }}
-                  >
-                    ${s.from.toLocaleString()}
-                  </span>
-                  {s.unit && (
-                    <span
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: 10,
-                        color: '#888',
-                      }}
-                    >
-                      {s.unit}
-                    </span>
-                  )}
+                  {s.sub}
                 </div>
               </motion.div>
             ))}
@@ -500,7 +499,7 @@ export default function PricingContent() {
         </div>
       </section>
 
-      {/* ────────── HOME SIZE ESTIMATES ────────── */}
+      {/* ────────── WHAT SHAPES YOUR QUOTE ────────── */}
       <section
         className="relative overflow-hidden"
         style={{ background: '#F5F4F1' }}
@@ -522,7 +521,7 @@ export default function PricingContent() {
                 }}
               >
                 <span style={{ display: 'inline-block', width: 28, height: 1, background: '#FF6B00' }} />
-                ─── 03 / Full move estimates
+                ─── 03 / What shapes your quote
               </motion.div>
 
               <motion.h2
@@ -540,10 +539,10 @@ export default function PricingContent() {
                   color: '#111',
                 }}
               >
-                What you&apos;ll
+                No two moves
                 <br />
                 <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
-                  actually pay.
+                  are the same.
                 </em>
               </motion.h2>
             </div>
@@ -562,13 +561,14 @@ export default function PricingContent() {
                 maxWidth: 460,
               }}
             >
-              Real ranges based on hundreds of local moves across South East Queensland.
-              The lower end is a smooth, easy-access job. The upper end accounts for
-              stairs, distance, and more items.
+              A price off the top of our head would just be a guess — and guesses are
+              how people end up with a bill bigger than the quote. Here&apos;s what we
+              actually look at. Mention these when you get in touch and we&apos;ll have
+              your number back faster.
             </motion.p>
           </div>
 
-          {/* Estimate rows */}
+          {/* Factor rows */}
           <div
             className="overflow-hidden rounded-[24px]"
             style={{
@@ -576,101 +576,55 @@ export default function PricingContent() {
               border: '1px solid rgba(0,0,0,0.07)',
             }}
           >
-            {homeSizeEstimates.map((est, i) => (
+            {quoteFactors.map((f, i) => (
               <motion.div
-                key={est.size}
+                key={f.title}
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="grid grid-cols-3 items-center gap-4 px-6 py-5 lg:px-8 lg:py-6"
+                className="flex items-start gap-4 px-6 py-5 lg:gap-6 lg:px-8 lg:py-6"
                 style={{
                   borderTop: i > 0 ? '1px solid rgba(0,0,0,0.06)' : 'none',
                 }}
               >
                 <div
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 20,
-                    fontWeight: 800,
-                    textTransform: 'uppercase',
-                    color: '#111',
-                    letterSpacing: '0.02em',
+                    background: 'rgba(125,211,252,0.10)',
+                    border: '1px solid rgba(125,211,252,0.25)',
                   }}
                 >
-                  {est.size}
+                  <f.icon size={17} style={{ color: '#0EA5E9' }} strokeWidth={1.8} />
                 </div>
-                <div className="hidden sm:block">
+                <div className="min-w-0">
                   <div
                     style={{
-                      fontFamily: "'Space Mono', monospace",
-                      fontSize: 9,
-                      color: '#0EA5E9',
-                      letterSpacing: '0.2em',
-                      textTransform: 'uppercase',
-                      fontWeight: 700,
-                    }}
-                  >
-                    Typical range
-                  </div>
-                </div>
-                <div className="col-span-2 text-right sm:col-span-1">
-                  <span
-                    style={{
                       fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: 26,
+                      fontSize: 20,
                       fontWeight: 800,
-                      color: '#FF6B00',
-                      letterSpacing: '-0.01em',
-                    }}
-                  >
-                    ${est.low.toLocaleString()} – ${est.high.toLocaleString()}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Office row callout */}
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {[
-              { label: 'Small office', low: 499, high: 890 },
-              { label: 'Medium office', low: 890, high: 1800 },
-            ].map((o) => (
-              <div
-                key={o.label}
-                className="flex items-center justify-between rounded-[16px] px-6 py-4"
-                style={{
-                  background: '#fff',
-                  border: '1px solid rgba(0,0,0,0.07)',
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <Briefcase size={16} style={{ color: '#0EA5E9' }} />
-                  <span
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: 16,
-                      fontWeight: 700,
                       textTransform: 'uppercase',
                       color: '#111',
                       letterSpacing: '0.02em',
+                      lineHeight: 1.15,
+                      marginBottom: 5,
                     }}
                   >
-                    {o.label}
-                  </span>
+                    {f.title}
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'Barlow', sans-serif",
+                      fontSize: 14.5,
+                      color: '#666',
+                      lineHeight: 1.6,
+                      maxWidth: 640,
+                    }}
+                  >
+                    {f.desc}
+                  </p>
                 </div>
-                <span
-                  style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 20,
-                    fontWeight: 800,
-                    color: '#FF6B00',
-                  }}
-                >
-                  ${o.low} – ${o.high.toLocaleString()}
-                </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -724,6 +678,7 @@ export default function PricingContent() {
                 }}
               >
                 Boxes, paper, tape, bubble wrap — everything you need to pack yourself.
+                Add a bundle to your quote and we&apos;ll drop it off before the move.
               </p>
 
               <div className="space-y-2">
@@ -769,14 +724,19 @@ export default function PricingContent() {
                       </div>
                     </div>
                     <div
+                      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5"
                       style={{
-                        fontFamily: "'Barlow Condensed', sans-serif",
-                        fontSize: 24,
-                        fontWeight: 800,
+                        background: 'rgba(255,107,0,0.08)',
+                        border: '1px solid rgba(255,107,0,0.18)',
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: 9,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
                         color: '#FF6B00',
+                        fontWeight: 700,
                       }}
                     >
-                      ${b.price}
+                      Add to quote
                     </div>
                   </motion.div>
                 ))}
@@ -820,7 +780,8 @@ export default function PricingContent() {
                   marginBottom: 24,
                 }}
               >
-                Items that need extra crew, gear, or experience.
+                Items that need extra crew, gear, or experience. Tell us what
+                you&apos;ve got and we&apos;ll build it into the quote.
               </p>
 
               <div className="space-y-2">
@@ -879,14 +840,19 @@ export default function PricingContent() {
                       </div>
                     </div>
                     <div
+                      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5"
                       style={{
-                        fontFamily: "'Barlow Condensed', sans-serif",
-                        fontSize: 22,
-                        fontWeight: 800,
+                        background: 'rgba(255,107,0,0.08)',
+                        border: '1px solid rgba(255,107,0,0.18)',
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: 9,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
                         color: '#FF6B00',
+                        fontWeight: 700,
                       }}
                     >
-                      ${item.price}
+                      Quoted
                     </div>
                   </motion.div>
                 ))}
@@ -939,7 +905,7 @@ export default function PricingContent() {
                 }}
               >
                 Other removalists tack these onto your final bill. We never do.
-                What you see is exactly what you pay — every single time.
+                They&apos;re in your quote from the start — every single time.
               </p>
             </div>
 
@@ -1024,7 +990,7 @@ export default function PricingContent() {
                     color: '#FF6B00',
                   }}
                 >
-                  ✦ Got an unusual job?
+                  ✦ Ready when you are
                 </div>
                 <h3
                   style={{
@@ -1038,7 +1004,7 @@ export default function PricingContent() {
                     marginBottom: 14,
                   }}
                 >
-                  Call us. We&apos;ll{' '}
+                  Tell us the job. We&apos;ll{' '}
                   <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
                     quote it.
                   </em>
@@ -1051,8 +1017,8 @@ export default function PricingContent() {
                     maxWidth: 480,
                   }}
                 >
-                  Every move is different. Tell us what you&apos;ve got and we&apos;ll send a fixed
-                  quote within the hour — no obligation, no callback chasing you for weeks.
+                  Takes two minutes. We&apos;ll send a fixed quote within the hour —
+                  no obligation, no callback chasing you for weeks.
                 </p>
               </div>
 
@@ -1072,7 +1038,7 @@ export default function PricingContent() {
                     boxShadow: '0 8px 32px rgba(255,107,0,0.4)',
                   }}
                 >
-                  Book online
+                  Get your free quote
                   <ArrowRight size={14} />
                 </Link>
                 <a

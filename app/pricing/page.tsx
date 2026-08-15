@@ -3,9 +3,9 @@ import PageHero from '@/components/PageHero';
 import PricingContent from '@/components/PricingContent';
 
 export const metadata: Metadata = {
-  title: 'Pricing — EzzyGo Removalist',
+  title: 'How Our Pricing Works — EzzyGo Removalist',
   description:
-    'Honest, transparent removalist pricing across South East Queensland. Hourly rates from $169/hr. GST, insurance, fuel & equipment included.',
+    'Every move is different, so every quote is too. Tell us what you need and get a free, no-obligation fixed quote — GST, insurance, fuel and equipment always included.',
 };
 
 export default function PricingPage() {
@@ -13,15 +13,15 @@ export default function PricingPage() {
     <>
       <PageHero
         eyebrow="─── Pricing"
-        headline="Real prices."
-        italic="No surprises."
-        subtitle="Hourly rates from $169. GST, insurance, fuel and equipment all included. The price you see is exactly what you pay."
+        headline="A fixed price."
+        italic="Before we lift a thing."
+        subtitle="No hourly guesswork, no surprise add-ons. Tell us what you're moving and we'll come back with one number — GST, insurance, fuel and equipment included."
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Pricing', href: '/pricing' },
         ]}
         ctas={[
-          { label: 'Book online', href: '/book', variant: 'primary' },
+          { label: 'Get your free quote', href: '/book', variant: 'primary' },
           { label: 'Call +61 481 356 811', href: 'tel:+61481356811', variant: 'phone' },
         ]}
       />

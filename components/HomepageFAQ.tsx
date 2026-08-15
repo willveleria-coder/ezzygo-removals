@@ -9,7 +9,7 @@ const faqs = [
   {
     category: 'Pricing',
     q: 'How much does a removalist actually cost?',
-    a: 'It depends on home size, distance and crew. As a rough guide: a 2-bedroom local move runs $720–$1,090, a 3-bedroom $1,090–$1,520, and a 4+ bedroom full day $1,520–$2,200. Our hourly rate starts at $169/hr for 2 movers + truck — GST, insurance, blankets and equipment all included.',
+    a: 'Every move is different, so we quote every job individually rather than working off a price list. We look at the size of the move, the distance, access at both ends, the date and any specialty items, then send you one fixed price — GST, insurance, blankets and equipment all included. Quotes are free, take a couple of minutes, and there\'s no obligation to book.',
   },
   {
     category: 'Time',

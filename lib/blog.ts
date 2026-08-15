@@ -52,7 +52,7 @@ export const posts: Post[] = [
       {
         heading: 'Park clearance and access',
         paragraphs: [
-          'Move your own car off the driveway. Tell us about narrow streets, low-hanging branches, dodgy gates. If your new place is in a unit complex, book the lift if your building requires it (most do for moves >2 hours).',
+          'Move your own car off the driveway. Tell us about narrow streets, low-hanging branches, dodgy gates. If your new place is in a unit complex, book the lift if your building requires it (most do for moves over a couple of hours).',
         ],
       },
       {
@@ -67,7 +67,7 @@ export const posts: Post[] = [
     slug: 'what-does-a-removalist-actually-cost',
     title: 'What does a removalist actually cost in Queensland?',
     excerpt:
-      'Most quotes online are vague. Here\'s a real breakdown of what you\'ll pay for a move in QLD, by home size.',
+      'Hourly rates tell you almost nothing. Here\'s what actually drives the cost of a move in QLD — and how to compare quotes properly.',
     date: '2025-09-05',
     readTime: '5 min',
     category: 'Cost & Pricing',
@@ -75,57 +75,65 @@ export const posts: Post[] = [
     body: [
       {
         paragraphs: [
-          'Removalists love to advertise hourly rates without telling you how many hours the job takes. The result: a "$149/hr" company can quietly turn into a $1,800 move. Here\'s the honest breakdown by home size for moves within South East Queensland.',
+          'Removalists love to advertise an hourly rate. It\'s a great marketing number because it sounds small and it commits to nothing — the rate tells you the price per hour, not how many hours the job will take. Two companies can quote the same rate and land hundreds of dollars apart on the same house.',
+          'That\'s why we quote a fixed price for the whole job instead. But whoever you end up using, it helps to know what actually moves the number. Here\'s the honest version.',
         ],
       },
       {
-        heading: 'Studio / 1 bedroom',
+        heading: 'How long the job really takes',
         paragraphs: [
-          'Typically 2-3 hours with 2 movers and a 6-tonne truck. Budget $400-$780 all up for a local move within Brisbane, Gold Coast, or Sunshine Coast.',
+          'This is the biggest factor by a mile, and it\'s the one hourly quotes leave up to chance. As a rough guide from our own jobs: a studio or 1-bedroom is usually 2-3 hours with 2 movers. A 2-bedroom is around 4 hours. A 3-bedroom runs 5-7 hours and we\'d almost always put 3 movers on it — the bigger crew finishes enough faster that it works out better for the customer, not worse. A 4-5 bedroom family home is a full day, 7-9 hours with 3-4 movers.',
+          'Those are ranges, not promises. A packed 2-bedroom with a garage full of tools takes longer than a sparse 3-bedroom.',
         ],
       },
       {
-        heading: '2 bedroom unit or small house',
+        heading: 'Access at both ends',
         paragraphs: [
-          'Usually 4 hours with 2 movers. Budget $720-$1,090 for a local move. Add $100-200 if you\'re crossing between Brisbane and Gold Coast/Sunshine Coast.',
+          'Stairs, no lift, long carries from the truck to the door, tight driveways, restricted street parking — each of these slows a job down noticeably, and access at the new place matters just as much as the old one. This is the single most common thing people forget to mention when getting quotes, and it\'s the most common reason a cheap quote turns into an expensive invoice.',
         ],
       },
       {
-        heading: '3 bedroom house',
+        heading: 'How much there actually is',
         paragraphs: [
-          '5-7 hours with 3 movers. Budget $1,090-$1,520 local. We almost always recommend 3 movers for a 3-bedroom — the extra hourly rate ($219/hr vs $169/hr) pays for itself in saved time.',
+          'Bedroom count is a proxy, not a measurement. What matters is volume: how full the wardrobes are, whether the garage is coming, how many boxes you\'ve got. Give whoever\'s quoting you an honest picture and you\'ll get an honest number.',
         ],
       },
       {
-        heading: '4-5 bedroom family home',
+        heading: 'Distance and the route',
         paragraphs: [
-          'Full day job — 7-9 hours with 3-4 movers. Budget $1,520-$2,200. Pre-pack the night before to keep this from running into overtime.',
+          'Pickup to drop-off, plus how far the crew travels to reach you. Crossing between Brisbane and the Gold Coast or Sunshine Coast adds drive time — and the time of day matters, because the M1 on a Friday afternoon is a different road to the M1 on a Tuesday morning.',
         ],
       },
       {
-        heading: 'What adds to the cost',
+        heading: 'Timing',
         paragraphs: [
-          'A few things genuinely cost more — and you should be wary of quotes that don\'t mention them.',
+          'End of month, weekends and school holidays are the busiest windows in Queensland removals. If your dates are flexible, a mid-week move mid-month is the easiest job to book and usually the smoothest one to run.',
+        ],
+      },
+      {
+        heading: 'Specialty items',
+        paragraphs: [
+          'Pianos, pool tables, safes, gym equipment and anything needing disassembly need extra crew or specific gear. None of these are a problem — but they need to be mentioned before the day, not discovered on it.',
+        ],
+      },
+      {
+        heading: 'What shouldn\'t be a separate line item',
+        paragraphs: [
+          'Some companies quote low and bolt these on afterwards. If any of them aren\'t already in the number you\'ve been given, you\'re not comparing like with like:',
         ],
         list: [
-          'Stairs and walk-ups (slows the job 20-30%)',
-          'Long carries from truck to door',
-          'Packing service if requested',
-          'Special items (piano, pool table, gun safe)',
-          'Interstate moves (priced flat, not hourly)',
-          'After-hours, weekends, public holidays',
+          'GST — must be included in the quoted figure',
+          'Insurance — basic goods-in-transit cover should be standard',
+          'Trolleys, blankets, straps and basic wrapping',
+          'Travel time between the two properties',
+          'Fuel',
         ],
       },
       {
-        heading: 'What shouldn\'t cost extra',
+        heading: 'How to compare quotes properly',
         paragraphs: [
-          'Some companies sneak these in. Watch out for:',
-        ],
-        list: [
-          'GST (must be included in the quote)',
-          'Insurance (basic cover should be standard)',
-          'Trolleys, blankets, straps (all should be included)',
-          'Travel time between properties',
+          'Ask every company for a fixed price for your specific job, not a rate. Tell all of them the same details — size, both addresses, stairs, parking, date, anything unusual. If one won\'t give you a fixed number, that\'s useful information about how the invoice is likely to look.',
+          'Our quotes are free, take a couple of minutes, and there\'s no obligation to book. Whatever we quote is what you pay.',
         ],
       },
     ],
@@ -134,7 +142,7 @@ export const posts: Post[] = [
     slug: 'packing-fragile-items-properly',
     title: 'How to pack fragile items so nothing breaks',
     excerpt:
-      'A 20-minute pack job saves $500 in broken stuff. Here\'s how the pros do it.',
+      'Twenty minutes of proper packing saves a box of broken glassware. Here\'s how the pros do it.',
     date: '2025-08-22',
     readTime: '4 min',
     category: 'Packing Guide',
@@ -177,7 +185,7 @@ export const posts: Post[] = [
       },
       {
         paragraphs: [
-          'Or — and we say this with bias — pay us $250 to do the whole pack for you. It takes us 2 hours what would take you 5, and nothing breaks. Up to you.',
+          'Or — and we say this with bias — have us do the whole pack for you. It takes us about 2 hours what would take you 5, and nothing breaks. Add it to your quote and we\'ll price it in. Up to you.',
         ],
       },
     ],
@@ -212,19 +220,19 @@ export const posts: Post[] = [
       {
         heading: 'Highrise rules are different on the Coast',
         paragraphs: [
-          'Surfers Paradise and Broadbeach buildings often have strict lift booking rules — usually 48 hours\' notice and a specific 2-hour move-in window. We\'ll handle the coordination but tell us your building when you book so we don\'t arrive at 9am and find the lift booked for noon.',
+          'Surfers Paradise and Broadbeach buildings often have strict lift booking rules — usually 48 hours\' notice and a specific 2-hour move-in window. We\'ll handle the coordination but tell us your building when you get a quote so we don\'t arrive at 9am and find the lift booked for noon.',
         ],
       },
       {
-        heading: 'What it usually costs',
+        heading: 'How we quote it',
         paragraphs: [
-          'A 2-bedroom Brisbane to Gold Coast move is typically $920-$1,290. A 3-bedroom $1,290-$1,720. We charge our normal hourly rate plus a small travel surcharge that covers the M1 run.',
+          'A 2-bedroom Brisbane to Gold Coast move is usually a comfortable single day, door to door. We quote the whole run as one fixed price — the M1 drive is built into that number, not added as a surcharge afterwards. Send us both addresses and a rough idea of what\'s coming and we\'ll have a price back to you, usually within the hour.',
         ],
       },
       {
         heading: 'What changes after the move',
         paragraphs: [
-          'Your power, gas and internet should be transferred 1-2 weeks ahead. Australia Post will redirect mail for 12 months from $33. Update your driver\'s license address within 14 days (you can do it online). The Gold Coast doesn\'t have separate council tax but rates are sometimes higher.',
+          'Your power, gas and internet should be transferred 1-2 weeks ahead. Australia Post will redirect mail for 12 months for a small fee — check their site for current rates. Update your driver\'s license address within 14 days (you can do it online). The Gold Coast doesn\'t have separate council tax but rates are sometimes higher.',
         ],
       },
     ],
@@ -251,9 +259,9 @@ export const posts: Post[] = [
         ],
       },
       {
-        heading: '2. "What\'s included in the hourly rate?"',
+        heading: '2. "What\'s included in the quote?"',
         paragraphs: [
-          'Trolleys, blankets, straps, fuel, GST — should all be included. If they say "blankets are extra $20 each" you\'re looking at a bad deal in disguise.',
+          'Trolleys, blankets, straps, fuel, GST — all of it should already be in the number. If any of those turn up as a separate line item later, the quote you compared was never the real price.',
         ],
       },
       {
@@ -269,9 +277,9 @@ export const posts: Post[] = [
         ],
       },
       {
-        heading: '5. "What\'s the minimum charge?"',
+        heading: '5. "Is this a fixed price or an estimate?"',
         paragraphs: [
-          'Most reputable companies have a 2-hour minimum. That\'s fair. Anything over 4 hours minimum on a small job is a red flag — they\'re hoping for time inflation.',
+          'This is the question that saves people the most money. An estimate can move on the day; a fixed price can\'t. If it\'s an estimate, ask what specifically would make it go up — and get the answer in writing before you book.',
         ],
       },
       {

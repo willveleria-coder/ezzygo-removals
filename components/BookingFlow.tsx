@@ -34,12 +34,11 @@ import {
 /* ───────── Types & Data ───────── */
 
 type ServiceOption = {
-  id: string;
-  label: string;
-  icon: any;
-  from: string;
-  duration: string;
-};
+        id: string;
+        label: string;
+        icon: any;
+        duration: string;
+      };
 
 type PropertySize = {
   id: string;
@@ -56,14 +55,14 @@ type MoveItem = {
 };
 
 const services: ServiceOption[] = [
-  { id: 'house-move',    label: 'House move',          icon: HomeIcon,   from: '$149/hr', duration: '3–6 hr' },
-  { id: 'furniture',     label: 'Furniture transport', icon: Sofa,       from: '$150',    duration: '2 hr' },
-  { id: 'office',        label: 'Office relocation',   icon: Briefcase,  from: '$150',    duration: '1 hr+' },
-  { id: 'interstate',    label: 'Interstate move',     icon: MapPinned,  from: '$2,500',  duration: '6 hr+' },
-  { id: 'same-day',      label: 'Same-day move',       icon: Clock,      from: '$250',    duration: '4 hr' },
-  { id: 'packing',       label: 'Packing service',     icon: Package,    from: '$250',    duration: '2 hr' },
-  { id: 'loading',       label: 'Load & unload only',  icon: Truck,      from: '$200',    duration: '1.5 hr' },
-  { id: 'storage',       label: 'Storage',             icon: Warehouse,  from: '$75',     duration: '1 hr' },
+  { id: 'house-move',    label: 'House move',          icon: HomeIcon,   duration: '3–6 hr' },
+  { id: 'furniture',     label: 'Furniture transport', icon: Sofa,       duration: '2 hr' },
+  { id: 'office',        label: 'Office relocation',   icon: Briefcase,  duration: '1 hr+' },
+  { id: 'interstate',    label: 'Interstate move',     icon: MapPinned,  duration: '6 hr+' },
+  { id: 'same-day',      label: 'Same-day move',       icon: Clock,      duration: '4 hr' },
+  { id: 'packing',       label: 'Packing service',     icon: Package,    duration: '2 hr' },
+  { id: 'loading',       label: 'Load & unload only',  icon: Truck,      duration: '1.5 hr' },
+  { id: 'storage',       label: 'Storage',             icon: Warehouse,  duration: 'Flexible' },
 ];
 
 const propertySizes: PropertySize[] = [
@@ -337,10 +336,8 @@ export default function BookingFlow() {
                         <IconBox><s.icon size={17} style={{ color: '#FF6B00' }} strokeWidth={1.8} /></IconBox>
                         <CardTitle>{s.label}</CardTitle>
                         <div className="mt-2 flex items-center gap-2" style={metaStyle}>
-                          <span style={{ color: '#FF6B00' }}>{s.from}</span>
-                          <span>·</span>
-                          <span>{s.duration}</span>
-                        </div>
+       <span>Typically {s.duration}</span>
+      </div>
                       </button>
                     );
                   })}
@@ -677,7 +674,7 @@ export default function BookingFlow() {
                         lineHeight: 1.6,
                       }}
                     >
-                      Stairs and restricted access typically add 20-30% to job time. We&apos;ll factor this into your final quote — no surprises.
+                      Stairs and restricted access take longer, so it&apos;s good you&apos;ve told us. We&apos;ll factor it into your quote up front — no surprises on the day.
                     </p>
                   </motion.div>
                 )}
@@ -865,18 +862,18 @@ export default function BookingFlow() {
                     color: '#111',
                   }}
                 >
-                  You&apos;re booked,
-                  <br />
-                  <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
-                    {form.name.split(' ')[0] || 'mate'}!
-                  </em>
+                  Request received,
+   <br />
+      <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>
+    {form.name.split(' ')[0] || 'mate'}!
+   </em>
                 </h2>
 
                 <p
                   className="mt-5 max-w-md"
                   style={{ fontFamily: "'Barlow', sans-serif", fontSize: 16, color: '#555', lineHeight: 1.7 }}
                 >
-                  We&apos;ll text you within the hour to confirm the crew and lock in the details. Check your inbox for a copy of your booking.
+                  We&apos;ll text you within the hour with your fixed price and confirm the crew. Nothing&apos;s locked in until you give us the go-ahead. Check your inbox for a copy of your details.
                 </p>
 
                 <div className="mt-8 grid w-full max-w-md gap-2 rounded-[16px] p-5 text-left" style={{ background: '#F5F4F1', border: '1px solid rgba(0,0,0,0.06)' }}>

@@ -21,7 +21,6 @@ export type Service = {
   short: string;
   description: string;
   duration: string;
-  from: string;
   heroImage: string;
   inclusions: string[];
   process: { step: string; title: string; desc: string }[];
@@ -39,7 +38,6 @@ export const services: Service[] = [
     description:
       'Our packing service is built for people who want their move done right — without lifting a finger. We bring premium boxes, bubble wrap, tape, and protective padding. Every item is carefully wrapped, labelled, and packed by room so unpacking is a breeze.',
     duration: '2 hours',
-    from: '$249',
     heroImage:
       'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=1600&q=80',
     inclusions: [
@@ -78,7 +76,7 @@ export const services: Service[] = [
       },
       {
         q: 'Can you pack just the fragile stuff?',
-        a: 'Yes — partial packing is fine. Pay only for what we do.',
+        a: 'Yes — partial packing is fine. Tell us what you want done and we\'ll quote just that.',
       },
     ],
   },
@@ -92,7 +90,6 @@ export const services: Service[] = [
     description:
       'Already packed? We\'ve got the muscle. Our loading and unloading service is for when you need a strong, careful crew to get everything onto and off the truck safely. We use blankets, straps, trolleys and dollies — no scuffed walls, no broken furniture.',
     duration: '1.5 hours',
-    from: '$199',
     heroImage:
       'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80',
     inclusions: [
@@ -126,12 +123,12 @@ export const services: Service[] = [
         a: 'Yes — our trucks come with the crew. 6, 8, or 10-tonne depending on the move size.',
       },
       {
-        q: 'What if my move takes longer than booked?',
-        a: 'We bill in 15-minute increments. No surprises — you only pay for time actually used.',
+        q: 'What if my move takes longer than expected?',
+        a: 'Your quote is a fixed price for the job. If it runs long on our end, that\'s on us — the number doesn\'t move.',
       },
       {
         q: 'Can you handle pianos or pool tables?',
-        a: 'Yes, with prior notice. These need specific equipment so we plan ahead.',
+        a: 'Yes, with prior notice. These need specific equipment so we plan ahead and build it into the quote.',
       },
     ],
   },
@@ -145,7 +142,6 @@ export const services: Service[] = [
     description:
       'The whole package — done by us, end to end. We pack everything in your old place, load it, transport it, unload it, and unpack at your new home. You walk in, your stuff is already in the right rooms, and you don\'t open a single box unless you want to.',
     duration: '4 hours',
-    from: '$899',
     heroImage:
       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80',
     inclusions: [
@@ -181,8 +177,8 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: 'How much does a full service move cost?',
-        a: 'For a 2-bedroom home, around $1,200–$1,800. We give a fixed quote after a quick walkthrough or video call.',
+        q: 'How is a full service move quoted?',
+        a: 'We do a quick walkthrough or video call, then send one fixed price covering the pack, the move and the set-up. No hourly meter running.',
       },
       {
         q: 'How far in advance should I book?',
@@ -190,7 +186,7 @@ export const services: Service[] = [
       },
       {
         q: 'Are my items insured?',
-        a: 'Yes — full goods-in-transit insurance on every full service move. No extra charge.',
+        a: 'Yes — full goods-in-transit insurance on every full service move, included in your quote.',
       },
     ],
   },
@@ -204,7 +200,6 @@ export const services: Service[] = [
     description:
       'House moves are our bread and butter. Whether it\'s a studio apartment or a five-bedroom family home, we\'ve done it hundreds of times across Queensland. Local crew, local trucks, local knowledge — we know the streets, the traffic, and the building access rules.',
     duration: '4 hours',
-    from: '$679',
     heroImage:
       'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1600&q=80',
     inclusions: [
@@ -218,8 +213,8 @@ export const services: Service[] = [
     process: [
       {
         step: '01',
-        title: 'Book online',
-        desc: 'Use our quote calculator or call. We confirm by text in minutes.',
+        title: 'Get a quote',
+        desc: 'Fill in the quote form or give us a call. We come back with a fixed price, usually within the hour.',
       },
       {
         step: '02',
@@ -235,15 +230,15 @@ export const services: Service[] = [
     faqs: [
       {
         q: 'Do you move on weekends?',
-        a: 'Yes — Saturday and Sunday at no extra charge. Public holidays may have a small surcharge.',
+        a: 'Yes — Saturday and Sunday, no problem. Just let us know the date when you ask for a quote.',
       },
       {
         q: 'What if my new place isn\'t ready yet?',
         a: 'We offer same-day storage — items stay on the truck or in our depot until you\'re ready.',
       },
       {
-        q: 'How is the cost calculated?',
-        a: 'Hourly rate × time + travel. Quote calculator on the home page gives you a live estimate.',
+        q: 'How is the price worked out?',
+        a: 'We look at the size of the move, the distance, access at both ends and the date, then give you one fixed number before the day. What we quote is what you pay.',
       },
     ],
   },
@@ -257,7 +252,6 @@ export const services: Service[] = [
     description:
       'Moving an office means moving a business. We get that. Our office relocation crews work after hours, overnight, or across a weekend so your team comes back on Monday to a fully set-up space. Desks, monitors, server racks, files — everything handled with care.',
     duration: '1 hour+',
-    from: '$499',
     heroImage:
       'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80',
     inclusions: [
@@ -292,7 +286,7 @@ export const services: Service[] = [
       },
       {
         q: 'Do you work after hours?',
-        a: 'Every office move is after-hours by default unless you say otherwise. No extra fee.',
+        a: 'Every office move is after-hours by default unless you say otherwise, and it\'s built into the quote.',
       },
       {
         q: 'What about confidential files?',
@@ -308,9 +302,8 @@ export const services: Service[] = [
     tagline: 'Your furniture, handled with care — every step of the way.',
     short: 'Single items or whole loads. Furniture delivery and marketplace pickups.',
     description:
-      'Bought a couch on Marketplace? Sold a dining table on Gumtree? Need that vintage cabinet from your grandma\'s place across town? We do single-item furniture transport every day. Cheaper than hiring a van, faster than borrowing your mate\'s ute.',
+      'Bought a couch on Marketplace? Sold a dining table on Gumtree? Need that vintage cabinet from your grandma\'s place across town? We do single-item furniture transport every day — easier than hiring a van, faster than borrowing your mate\'s ute.',
     duration: '2 hours',
-    from: '$169',
     heroImage:
       'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=80',
     inclusions: [
@@ -340,8 +333,8 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: 'How much for a single couch across town?',
-        a: 'Usually $150–$250 depending on distance and access. Quote in 2 minutes by text.',
+        q: 'How do I get a price for a single couch?',
+        a: 'Send a photo and the two addresses. We\'ll text back a fixed price, usually in a couple of minutes.',
       },
       {
         q: 'Can you pick up from a store?',
@@ -363,7 +356,6 @@ export const services: Service[] = [
     description:
       'Selling your house but new place isn\'t ready? Renovating and need things out of the way? We offer secure short and long-term storage in clean, climate-controlled units. Move in, store, and pull out whenever you need — no long contracts.',
     duration: '1 hour',
-    from: '$45/wk',
     heroImage:
       'https://images.unsplash.com/photo-1601599561213-832382fd07ba?w=1600&q=80',
     inclusions: [
@@ -416,7 +408,6 @@ export const services: Service[] = [
     description:
       'Moving to NSW, VIC, or anywhere down south? We run regular interstate routes from Queensland. Fixed quotes, single-vehicle moves (no transfers, no shared trucks unless you opt in), real-time tracking, and full insurance for the long haul.',
     duration: '6 hours',
-    from: '$2,499',
     heroImage:
       'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80',
     inclusions: [
@@ -450,12 +441,12 @@ export const services: Service[] = [
         a: '2–3 days door-to-door for dedicated runs. Faster on premium service.',
       },
       {
-        q: 'Are shared loads cheaper?',
-        a: 'Yes — if you can be flexible on dates we can split a truck with another client. Save up to 40%.',
+        q: 'Is a shared load an option?',
+        a: 'Yes — if you can be flexible on dates we can split a truck with another client, which brings the quote down. Ask when you enquire.',
       },
       {
-        q: 'What\'s the cheapest state to move to?',
-        a: 'Northern NSW is closest. Sydney and Melbourne are the most popular routes — we run them weekly.',
+        q: 'Which interstate routes do you run most?',
+        a: 'Northern NSW is our closest run. Sydney and Melbourne are the most popular — we do them weekly.',
       },
     ],
   },
@@ -467,15 +458,14 @@ export const services: Service[] = [
     tagline: 'Your urgent move, handled with speed and care.',
     short: 'Urgent? No worries. Subject to availability, we\'ll be there today.',
     description:
-      'Lease ending tonight? Sudden change of plans? We keep slots open every day for same-day jobs. Call before midday and we\'ll usually be there before dinner — same hourly rate, no panic premium.',
+      'Lease ending tonight? Sudden change of plans? We keep slots open every day for same-day jobs. Call before midday and we\'ll usually be there before dinner — quoted the same way as any other move, no panic premium.',
     duration: '4 hours',
-    from: '$249',
     heroImage:
       'https://images.unsplash.com/photo-1623861397259-d8c5fb4a3e8b?w=1600&q=80',
     inclusions: [
       'Same-day availability',
-      'No urgent-booking surcharge',
-      'Standard hourly rates',
+      'No panic-booking premium',
+      'Fixed quote before we start',
       'Full crew + truck',
       'Quick pre-move call',
       'Insurance included',
@@ -499,8 +489,8 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: 'Is there an urgent surcharge?',
-        a: 'No — same-day moves are priced at our standard hourly rate. We just charge for actual time used.',
+        q: 'Do you charge more for an urgent move?',
+        a: 'We quote same-day jobs the same way we quote anything else — one fixed price based on the job, not on how stressed you are.',
       },
       {
         q: 'How late can I call?',
@@ -518,11 +508,10 @@ export const services: Service[] = [
     icon: PackageCheck,
     title: 'Local Brisbane Moves',
     tagline: 'Making your local Brisbane move a breeze.',
-    short: 'Quick, affordable, expert local moves within Brisbane.',
+    short: 'Quick, straightforward, expert local moves within Brisbane.',
     description:
-      'We know Brisbane. Every suburb, every tight street, every tricky highrise loading dock. Local Brisbane moves are quick, affordable, and stress-free — usually under half a day for a 2-bedroom unit.',
+      'We know Brisbane. Every suburb, every tight street, every tricky highrise loading dock. Local Brisbane moves are quick and stress-free — usually under half a day for a 2-bedroom unit.',
     duration: '3 hours',
-    from: '$199',
     heroImage:
       'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1600&q=80',
     inclusions: [
@@ -530,7 +519,7 @@ export const services: Service[] = [
       'Knowledge of every suburb',
       'Highrise / unit specialists',
       'Trolleys for long hallways',
-      'Half-day rates available',
+      'Half-day moves available',
       'Full insurance',
     ],
     process: [
@@ -561,7 +550,7 @@ export const services: Service[] = [
       },
       {
         q: 'Do you cover Gold Coast / Sunshine Coast?',
-        a: 'Yes — same crew, same rates. Just call out the suburb when you book.',
+        a: 'Yes — same crew, same standard. Just call out the suburb when you ask for a quote.',
       },
     ],
   },

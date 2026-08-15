@@ -22,7 +22,6 @@ const services = [
     title: 'Packing service',
     desc: "Premium materials, efficient packing. We treat your stuff like it's ours.",
     duration: '2 hr',
-    from: '$249',
   },
   {
     n: '02',
@@ -30,7 +29,6 @@ const services = [
     title: 'Loading & unloading',
     desc: 'Safe transport of household items. Trained crew, padded everything.',
     duration: '1.5 hr',
-    from: '$199',
   },
   {
     n: '03',
@@ -38,7 +36,6 @@ const services = [
     title: 'Full service move',
     desc: 'Door-to-door white-glove service. Pack, transport, unpack, done.',
     duration: '4 hr',
-    from: '$899',
   },
   {
     n: '04',
@@ -46,15 +43,13 @@ const services = [
     title: 'Furniture transport',
     desc: 'Single items or whole loads. Handled with care every step of the way.',
     duration: '2 hr',
-    from: '$169',
   },
   {
     n: '05',
     icon: Warehouse,
     title: 'Storage solutions',
     desc: 'Secure short and long-term storage. Flexible plans, climate-safe.',
-    duration: '1 hr',
-    from: '$45/wk',
+    duration: 'Flexible',
   },
   {
     n: '06',
@@ -62,7 +57,6 @@ const services = [
     title: 'Interstate moves',
     desc: "Crossing state lines? We'll get you there safely, on time, in one piece.",
     duration: '6 hr+',
-    from: '$2,499',
   },
   {
     n: '07',
@@ -70,7 +64,6 @@ const services = [
     title: 'Same-day moves',
     desc: "Urgent? No worries. Subject to availability, we'll be there today.",
     duration: '4 hr',
-    from: '$249',
   },
   {
     n: '08',
@@ -78,7 +71,6 @@ const services = [
     title: 'Office relocations',
     desc: 'Move your business with zero downtime. After-hours and weekends welcome.',
     duration: '1 hr+',
-    from: '$499',
   },
 ];
 
@@ -113,7 +105,7 @@ const trustBar = [
   {
     icon: HeartHandshake,
     title: 'No-pressure quotes',
-    desc: 'Fixed pricing. No hidden fees. Ever.',
+    desc: 'One fixed price. No hidden fees. Ever.',
     blue: true,
   },
 ];
@@ -227,7 +219,7 @@ export default function Services() {
             style={{ fontSize: 17, color: '#555', lineHeight: 1.65, maxWidth: 380 }}
           >
             From a single armchair across town to a five-bedroom interstate
-            relocation — book any service in under a minute.
+            relocation — tell us what you need and we&apos;ll quote it in minutes.
           </motion.p>
         </div>
 
@@ -316,33 +308,22 @@ export default function Services() {
               </p>
 
               <div
-                className="flex items-end justify-between pt-3"
+                className="flex items-center justify-between pt-3"
                 style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}
               >
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "'Space Mono', monospace",
-                      fontSize: 9,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.2em',
-                      color: '#aaa',
-                      marginBottom: 3,
-                    }}
-                  >
-                    From
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: 28,
-                      fontWeight: 800,
-                      color: '#FF6B00',
-                      lineHeight: 1,
-                    }}
-                  >
-                    {s.from}
-                  </div>
+                <div
+                  className="flex items-center gap-1.5"
+                  style={{
+                    fontFamily: "'Space Mono', monospace",
+                    fontSize: 9,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.18em',
+                    color: '#0EA5E9',
+                    fontWeight: 700,
+                  }}
+                >
+                  <ShieldCheck size={11} />
+                  Free fixed quote
                 </div>
                 <div
                   style={{

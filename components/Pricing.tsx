@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import {
   Truck,
   Home,
-  Package,
-  Sofa,
   Anchor,
   Box,
   Check,
@@ -13,10 +11,9 @@ import {
   Phone,
 } from 'lucide-react';
 
-const hourly = [
+const crews = [
   {
     name: '2 Men + Truck',
-    price: 149,
     desc: 'Perfect for small to medium local moves.',
     tag: null,
     features: ['Up to 3 bedrooms', '6-tonne truck', 'Trolleys & blankets', 'GST + insurance'],
@@ -24,7 +21,6 @@ const hourly = [
   },
   {
     name: '3 Men + Truck',
-    price: 189,
     desc: 'Best for larger homes and faster loading.',
     tag: 'Most booked',
     features: ['Up to 5 bedrooms', '8-tonne truck', 'Priority booking', 'Disassembly help', 'Premium equipment'],
@@ -32,18 +28,18 @@ const hourly = [
   },
 ];
 
-const fixedPrices = [
-  { icon: Home,    label: 'Small Moves',          from: '$250', desc: 'Quick moves for small loads and short trips.' },
-  { icon: Home,    label: '1 Bedroom',             from: '$350', desc: 'Affordable option for units and apartments.' },
-  { icon: Home,    label: '2 Bedroom',             from: '$550', desc: 'Reliable moving for small family homes.' },
-  { icon: Home,    label: '3 Bedroom',             from: '$850', desc: 'Ideal for larger household relocations.' },
-  { icon: Anchor,  label: 'Pool Table Moves',      from: '$350', desc: 'Heavy item handling with extra care.' },
-  { icon: Box,     label: 'Single Item Delivery',  from: '$120', desc: 'Furniture delivery and marketplace pickups.' },
+const moveTypes = [
+  { icon: Home,   label: 'Small Moves',         desc: 'Quick moves for small loads and short trips.' },
+  { icon: Home,   label: '1 Bedroom',           desc: 'Units and apartments, in and out the same day.' },
+  { icon: Home,   label: '2 Bedroom',           desc: 'Reliable moving for small family homes.' },
+  { icon: Home,   label: '3 Bedroom',           desc: 'Ideal for larger household relocations.' },
+  { icon: Anchor, label: 'Pool Table Moves',    desc: 'Heavy item handling with extra care.' },
+  { icon: Box,    label: 'Single Item Delivery',desc: 'Furniture delivery and marketplace pickups.' },
 ];
 
 const guarantees = [
-  'Prices may vary on access, stairs, distance & volume',
-  'Fixed quotes available on request',
+  'One fixed price agreed before we start',
+  'Quote covers stairs, access, distance & volume',
   'No hidden fees. Ever.',
 ];
 
@@ -101,9 +97,9 @@ export default function Pricing() {
                 color: '#111',
               }}
             >
-              Simple &amp; transparent
+              One fixed price,
               <br />
-              <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>pricing.</em>
+              <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>before we start.</em>
             </motion.h2>
           </div>
 
@@ -114,14 +110,15 @@ export default function Pricing() {
             transition={{ delay: 0.18 }}
             style={{ fontSize: 16, color: '#666', lineHeight: 1.7, maxWidth: 380 }}
           >
-            Competitive rates with no hidden fees. Affordable removalists in Brisbane,
-            Gold Coast and across Queensland.
+            Every move is different, so we quote every job properly instead of
+            working off a price list. Free quotes for Brisbane, Gold Coast and
+            across Queensland.
           </motion.p>
         </div>
 
-        {/* ── Hourly rates ── */}
+        {/* ── Crew options ── */}
         <div className="mb-4 grid gap-4 sm:grid-cols-2">
-          {hourly.map((tier, i) => {
+          {crews.map((tier, i) => {
             const isHot = tier.tag !== null;
             return (
               <motion.div
@@ -202,32 +199,6 @@ export default function Pricing() {
                   {tier.desc}
                 </div>
 
-                {/* Price */}
-                <div className="mb-6 flex items-baseline gap-1">
-                  <span
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: 'clamp(52px, 6vw, 72px)',
-                      fontWeight: 900,
-                      color: '#FF6B00',
-                      lineHeight: 1,
-                      letterSpacing: '-0.03em',
-                    }}
-                  >
-                    ${tier.price}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Space Mono', monospace",
-                      fontSize: 11,
-                      color: isHot ? 'rgba(255,255,255,0.35)' : '#aaa',
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    /hr
-                  </span>
-                </div>
-
                 {/* Features */}
                 <ul className="mb-8 space-y-2.5">
                   {tier.features.map((f) => (
@@ -272,16 +243,16 @@ export default function Pricing() {
                     el.style.transform = 'translateY(0)';
                   }}
                 >
-                  Get started <ArrowRight size={15} />
+                  Get a quote <ArrowRight size={15} />
                 </a>
               </motion.div>
             );
           })}
         </div>
 
-        {/* ── Fixed price grid ── */}
+        {/* ── Move types grid ── */}
         <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {fixedPrices.map((item, i) => (
+          {moveTypes.map((item, i) => (
             <motion.a
               key={item.label}
               href="#quote"
@@ -342,30 +313,21 @@ export default function Pricing() {
                 {item.desc}
               </p>
 
-              {/* Price */}
+              {/* Quote prompt */}
               <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', paddingTop: 12 }}>
                 <div
+                  className="flex items-center gap-1.5"
                   style={{
                     fontFamily: "'Space Mono', monospace",
-                    fontSize: 8,
+                    fontSize: 9,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.2em',
-                    color: '#bbb',
-                    marginBottom: 3,
-                  }}
-                >
-                  From
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 26,
-                    fontWeight: 900,
+                    letterSpacing: '0.18em',
                     color: '#FF6B00',
-                    lineHeight: 1,
+                    fontWeight: 700,
                   }}
                 >
-                  {item.from}
+                  Get a quote
+                  <ArrowRight size={11} className="transition-transform group-hover:translate-x-0.5" />
                 </div>
               </div>
             </motion.a>
@@ -423,7 +385,7 @@ export default function Pricing() {
               }}
             >
               Not sure which option?{' '}
-              <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>We'll figure it out.</em>
+              <em style={{ fontStyle: 'italic', color: '#FF6B00' }}>We&apos;ll figure it out.</em>
             </div>
             <div
               style={{
@@ -435,7 +397,7 @@ export default function Pricing() {
                 textTransform: 'uppercase',
               }}
             >
-              Call us — we'll give you a fixed quote in 2 minutes.
+              Call us — we&apos;ll give you a fixed quote in 2 minutes.
             </div>
           </div>
 
@@ -445,17 +407,17 @@ export default function Pricing() {
               className="flex items-center gap-2 rounded-[12px] px-6 py-3.5 transition-all duration-200"
               style={{
                 background: '#FF6B00',
-fontFamily: "'Barlow Condensed', sans-serif",
-fontSize: 15,
-fontWeight: 800,
-textTransform: 'uppercase',
-letterSpacing: '0.07em',
-color: '#fff',
-textDecoration: 'none',
-boxShadow: '0 8px 28px rgba(255,107,0,0.35)',
-whiteSpace: 'nowrap',
-flex: 1,
-justifyContent: 'center',
+                fontFamily: "'Barlow Condensed', sans-serif",
+                fontSize: 15,
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.07em',
+                color: '#fff',
+                textDecoration: 'none',
+                boxShadow: '0 8px 28px rgba(255,107,0,0.35)',
+                whiteSpace: 'nowrap',
+                flex: 1,
+                justifyContent: 'center',
               }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.background = '#e55f00';
